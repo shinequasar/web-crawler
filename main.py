@@ -12,7 +12,9 @@ if data.status_code != requests.codes.ok:
 html = BeautifulSoup(data.text, "html.parser")
 
 events = html.select('.list_style_2 ul > li')
-for event in events[0::3]:
+for event in events[::3]:
     title = event.select_one('.title .txt').text
     host = event.select_one('.host li').text.strip().replace("주최","").replace(".","")
-    print(title, host)
+    target = event.select_one('li .icon_2').text.strip().replace("대상","").replace(".","").replace(" ","")
+    date = event.select_one('.date div').text
+    print(title, host, target, date)
