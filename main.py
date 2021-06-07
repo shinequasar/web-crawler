@@ -11,7 +11,8 @@ if data.status_code != requests.codes.ok:
 
 html = BeautifulSoup(data.text, "html.parser")
 
-events = html.select('.list_style_2 ul > li .title')
-for event in events:
-    title = event.select_one('.txt')
-    print(title.text)
+events = html.select('.list_style_2 ul > li')
+for event in events[0::3]:
+    title = event.select_one('.title .txt').text
+    host = event.select_one('.host li').text.strip().replace("주최","").replace(".","")
+    print(title, host)
