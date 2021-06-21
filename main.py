@@ -18,6 +18,12 @@ for page_num in range(1, 33):
 
     html = BeautifulSoup(data.text, "html.parser")
 
+    if data.status_code != requests.codes.ok:
+        print("접속실패")
+        exit()
+
+    html = BeautifulSoup(data.text, "html.parser")
+
     events = html.select('.list_style_2 ul > li')
     for event in events[::3]:
         data_dict = {}
