@@ -30,7 +30,7 @@ jobs:
       run: |
         git config --local user.email "shinequasar@gmail.com"
         git config --local user.name "Auto_Crawler_Event" # 커밋에 포함될 이름
-        git add news.json
+        git add event_list.csv
         git commit -m "Auto - Update Event data with Crawler" # 커밋 메세지
     - name: Push
       uses: ad-m/github-push-action@master
