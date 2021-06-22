@@ -1,8 +1,15 @@
 import csv
 import requests
 from bs4 import BeautifulSoup
+import datetime
 
 f = open("event_list.csv","w", encoding="utf-8-sig", newline="")
+
+wr = csv.writer(f)
+now = datetime.datetime.now()
+now = now.strftime('%Y-%m-%d %H:%M:%S')
+wr.writerow(['최종 업데이트 날짜', now])
+
 writer = csv.DictWriter(f,
                         fieldnames=["제목", "주최", "대상", "날짜"])
 writer.writeheader()
@@ -25,6 +32,7 @@ for page_num in range(1, 33):
     html = BeautifulSoup(data.text, "html.parser")
 
     events = html.select('.list_style_2 ul > li')
+
     for event in events[::3]:
         data_dict = {}
         title = event.select_one('.title .txt').text
